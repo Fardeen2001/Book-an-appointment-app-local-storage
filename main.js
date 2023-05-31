@@ -4,6 +4,7 @@ let items=document.getElementById("itemsul");
 
 form.addEventListener("submit",additems)
 items.addEventListener("click",removeitems)
+items.addEventListener("click",edititems)
 function additems(e){
     e.preventDefault();
     let nameval=document.getElementById("name").value;
@@ -17,7 +18,11 @@ function additems(e){
     let dbtn=document.createElement("button");
     dbtn.className="delbtn"
     dbtn.appendChild(document.createTextNode("Delete"))
+    let ebtn=document.createElement("button");
+    ebtn.className="editbtn"
+    ebtn.appendChild(document.createTextNode("Edit"))
     li.appendChild(dbtn)
+    li.appendChild(ebtn)
     items.appendChild(li)
 
     var userdetails={
@@ -34,3 +39,16 @@ if(e.target.classList.contains("delbtn")){
     localStorage.removeItem(remv)
 }
 }
+function edititems(e){
+    if(e.target.classList.contains("editbtn")){
+        let rem=e.target.parentElement;
+        items.removeChild(rem);
+        
+        let remv=document.getElementById("name").value;
+        // console.log(remv)
+        let obj=localStorage.getItem(remv);
+        
+        let objele=JSON.parse(obj);
+        localStorage.removeItem(remv)
+    }
+    }
